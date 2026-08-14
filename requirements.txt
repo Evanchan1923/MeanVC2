@@ -12,6 +12,7 @@ prefigure==0.0.10
 wandb==0.23.1
 
 # Data
+datasets>=2.20
 numpy>=1.26,<2.1
 
 # Audio
@@ -38,3 +39,4 @@ PyYAML>=6.0
 matplotlib>=3.8
 scipy>=1.11
 huggingface-hub>=0.25
+safetensors>=0.4

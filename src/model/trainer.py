@@ -46,7 +46,7 @@ class Trainer:
         max_samples=32,
         grad_accumulation_steps=1,
         max_grad_norm=1.0,
-        wandb_project="test_e2-tts",
+        wandb_project="meanvc",
         wandb_run_name="test_run",
         wandb_resume_id: str = None,
         last_per_steps=None,
@@ -134,7 +134,7 @@ class Trainer:
         self.num_warmup_updates = num_warmup_updates
         self.save_per_updates = save_per_updates
         self.last_per_steps = default(last_per_steps, save_per_updates * grad_accumulation_steps)
-        self.checkpoint_path = default(checkpoint_path, "ckpts/test_e2-tts")
+        self.checkpoint_path = default(checkpoint_path, "ckpts/meanvc")
 
         self.max_samples = max_samples
         self.grad_accumulation_steps = grad_accumulation_steps
@@ -556,7 +556,7 @@ class Trainer:
 
                 progress_bar.set_postfix(step=str(global_step), loss=diff_loss.item(), mse_val=mse_val.item())
 
-                if global_step % 10000 == 0:
+                if global_step % 10000 == 0 and int(getattr(self.args, "run_validation", 0)):
                     if self.accelerator.is_main_process:
                         try:
                             self.validate(global_step)

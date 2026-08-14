@@ -184,7 +184,6 @@ class MeanFlow:
                     cache=cache, 
                     cond=bn, 
                     spks=spks,
-                    prompts=prompts,
                     mask=original_mask,
                     is_uncondition=True)
         # v_hat = self.w * v + (1 - self.w) * u_t
@@ -201,7 +200,7 @@ class MeanFlow:
 
         # forward pass
         # u = model(z, t, r, y=c)
-        model_partial = partial(model, cache=cache, cond=bn, spks=spks, prompts=prompts,
+        model_partial = partial(model, cache=cache, cond=bn, spks=spks,
                                mask=original_mask,
                                cfg_mask=cfg_mask
                                )
@@ -280,7 +279,6 @@ class MeanFlow:
                 cache=cache, 
                 cond=bn, 
                 spks=spks,
-                prompts=prompts,
                 mask=original_mask,
                 is_uncondition=True)
         # v_hat = self.w * v + (1 - self.w) * u_t
@@ -297,7 +295,7 @@ class MeanFlow:
 
         # forward pass
         # u = model(z, t, r, y=c)
-        model_partial = partial(model, cache=cache, cond=bn, spks=spks, prompts=prompts,
+        model_partial = partial(model, cache=cache, cond=bn, spks=spks,
                                mask=original_mask,
                                cfg_mask=cfg_mask
                                )
@@ -445,7 +443,6 @@ class MeanFlow:
                 cache=cache,
                 cond=bn,
                 spks=spks,
-                prompts=prompts,
                 mask=original_mask,
             )
         
@@ -508,7 +505,6 @@ class MeanFlow:
                 cache=cache,
                 cond=bn,
                 spks=spks,
-                prompts=prompts,
                 mask=original_mask,
             )
         
@@ -519,7 +515,6 @@ class MeanFlow:
                 cache=cache,
                 cond=bn,
                 spks=spks,
-                prompts=prompts,
                 mask=original_mask,
         )
         
