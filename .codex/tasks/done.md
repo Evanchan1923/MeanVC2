@@ -1,5 +1,6 @@
 # Done
 
+- 2026-08-14: Moved the standalone MeanVC2 fine-tune repository to `/home/evan1923/projects/JC-meanVC2`, changed its `origin` remote to `git@github.com:Evanchan1923/MeanVC2.git`, and created the `sapc-finetune-pipeline` branch for the transferred pipeline work.
 - 2026-08-14: Transferred the current SAPC MeanVC2 fine-tune pipeline and `.codex` project settings into `JC-meanVC2`, patched the inner MeanVC2 training entrypoint for pretrained checkpoint loading and artifact checkpoint paths, and moved the outer gitlink tracking from `MeanVC2-JC` to `JC-meanVC2`.
 - 2026-08-14: Compared `MeanVC2-JC` against the current MeanVC repo and ported the MeanVC2 model path into the current SAPC fine-tune workflow, preserving the PBS/YAML launcher structure and checkpoint flow.
 - 2026-08-13: Added a MeanVC fine-tuning pipeline for the SAPC Severe Hugging Face dataset, including HF bytes-audio feature preparation, config YAML, PBS launcher, trainer fixes, and static checks.

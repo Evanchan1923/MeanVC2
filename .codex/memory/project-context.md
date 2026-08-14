@@ -1,5 +1,6 @@
 # Project Context
 
+- The active standalone repository path is `/home/evan1923/projects/JC-meanVC2`; its GitHub remote is `git@github.com:Evanchan1923/MeanVC2.git`.
 - `JC-meanVC2/` is the active pulled MeanVC2 repository path for ongoing SAPC fine-tuning work; the old outer gitlink path was `MeanVC2-JC`.
 - MeanVC downloaded checkpoints are expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
 - MeanVC2 fine-tuning uses the same checkpoint root, with `meanvc2_120ms_40ms.safetensors` and `fastu2pp_160ms.pt` expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
