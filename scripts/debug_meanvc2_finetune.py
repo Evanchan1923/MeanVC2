@@ -74,6 +74,7 @@ def check_config_paths(cfg: dict[str, Any], repo_root: Path, train_args: dict[st
     require_file(Path(train_args["pretrained_ckpt_path"]).expanduser(), "MeanVC2 pretrained safetensors")
     require_file(Path(cfg["prepare"]["asr_ckpt_path"]).expanduser(), "FastU2++ ASR checkpoint")
     require_file(Path(cfg["prepare"]["speaker_verification_ckpt_path"]).expanduser(), "speaker verification checkpoint")
+    require_file(repo_root / "preprocess/ckpts/wavlm_large.pt", "WavLM-Large base checkpoint")
 
     vocoder_path = Path(cfg["user_settings"]["checkpoint_root"]).expanduser() / "vocos.pt"
     require_file(vocoder_path, "Vocos checkpoint")

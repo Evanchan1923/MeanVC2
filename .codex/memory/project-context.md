@@ -6,6 +6,7 @@
 - The previous nested MeanVC2 paths under `/home/evan1923/projects/MeanVC2_JC` were `JC-meanVC2/` and the older gitlink `MeanVC2-JC`; ongoing work should use this standalone repository.
 - MeanVC downloaded checkpoints are expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
 - MeanVC2 fine-tuning uses the same checkpoint root, with `meanvc2_120ms_40ms.safetensors` and `fastu2pp_160ms.pt` expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
+- MeanVC2 speaker embedding needs both repo-local `preprocess/ckpts/wavlm_large.pt` and shared `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint/wavlm_large_finetune.pth`; the fine-tuned speaker-verification checkpoint comes from upstream's Google Drive link, not the MeanVC2 Hugging Face snapshot.
 - The SAPC MeanVC2 manifest should follow upstream's four-field format: `utt_id|bn.npy|mel.npy|xvector.npy`.
 - Katana MeanVC2 jobs should activate `/srv/scratch/z5327748/conda_envs/meanvc2` from `/srv/scratch/z5327748/miniforge3`; the PBS script checks that active Python is 3.11.
 - Katana GPU portability targets V100/A100/H100/H200 with V100 as the floor; use `TORCH_CUDA_ARCH_LIST=7.0;8.0;9.0` when installing packages that may compile CUDA extensions.

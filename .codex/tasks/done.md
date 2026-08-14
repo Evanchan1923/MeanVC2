@@ -1,5 +1,6 @@
 # Done
 
+- 2026-08-14: Diagnosed `meanVC_ft_debug.log` as a missing `wavlm_large_finetune.pth` speaker-verification checkpoint and updated setup/debug docs to make the manual WavLM checkpoint requirement explicit.
 - 2026-08-14: Added `meanVC_ft_debug.pbs` and `scripts/debug_meanvc2_finetune.py` to validate the Katana conda environment, GPU, imports, checkpoint files, model/pretrained loading, JIT checkpoints, config paths, and prepared manifest without launching full training.
 - 2026-08-14: Made the MeanVC2 Katana setup portable across V100/A100/H100/H200 by adding a shared CUDA 12.1 conda setup script, a runtime GPU compatibility checker, PBS GPU validation, and portability documentation with V100 as the minimum target.
 - 2026-08-14: Updated `meanVC_ft_v1.pbs` to default to the `/srv/scratch/z5327748/conda_envs/meanvc2` conda env from `/srv/scratch/z5327748/miniforge3`, purge inherited modules, load CUDA/ffmpeg only, and fail early unless the active conda Python is 3.11.

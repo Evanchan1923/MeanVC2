@@ -98,6 +98,18 @@ qsub meanVC_ft_debug.pbs
 python initialization.py --task all
 ```
 
+This downloads the MeanVC2 Hugging Face checkpoints and the WavLM-Large base checkpoint. The fine-tuned speaker verification weights are distributed separately by upstream and must exist at:
+
+```bash
+/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint/wavlm_large_finetune.pth
+```
+
+Upstream Google Drive link:
+
+```text
+https://drive.google.com/file/d/1-aE1NfzpRCLxA4GUxX9ITI3F9LlbtEGP/view
+```
+
 Or download only what you need:
 
 ```bash
