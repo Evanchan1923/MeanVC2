@@ -1,5 +1,7 @@
 # Decisions
 
+- Keep debug validation separate from full fine-tuning in `meanVC_ft_debug.pbs` so environment/checkpoint failures can be diagnosed quickly without consuming a long training allocation.
+- Keep the shared Katana MeanVC2 environment on CUDA 12.1 and `mixed_precision: no` so it remains compatible with V100 while still running on A100/H100/H200 without rebuilds.
 - Use a Python 3.11 conda environment for MeanVC2 training, matching upstream README; do not rely on Katana's `python/3.10.8` module for the training interpreter.
 - Keep the SAPC HF wrapper additive while preserving upstream MeanVC2's active training contract: 120ms+40ms config, pretrained safetensors initialization, 160ms BN extraction, and four-field `utt|bn|mel|xvector` manifests.
 - Keep the `sapc-finetune-pipeline` to `main` merge local for now; do not push `main` to `origin` without an explicit user request.

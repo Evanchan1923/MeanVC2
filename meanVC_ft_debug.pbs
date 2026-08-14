@@ -1,0 +1,61 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=4:ngpus=1:mem=32gb
+#PBS -l walltime=00:30:00
+#PBS -M z5327748@ad.unsw.edu.au
+#PBS -m abe
+#PBS -j oe
+#PBS -N meanVC_ft_debug
+#PBS -o meanVC_ft_debug.log
+
+set -euo pipefail
+cd "${PBS_O_WORKDIR:-$PWD}"
+echo "Debug job started at: $(date)  Job ID: ${PBS_JOBID:-unknown}  Host: $(hostname)"
+
+CONFIG_PATH="${CONFIG_PATH:-configs/meanVC_ft_v1.yaml}"
+CONDA_ENV="${CONDA_ENV:-/srv/scratch/z5327748/conda_envs/meanvc2}"
+CONDA_ROOT="${CONDA_ROOT:-/srv/scratch/z5327748/miniforge3}"
+SKIP_MODEL_LOAD="${SKIP_MODEL_LOAD:-0}"
+SKIP_JIT_LOAD="${SKIP_JIT_LOAD:-0}"
+MANIFEST_ROWS="${MANIFEST_ROWS:-3}"
+
+module purge
+module load ffmpeg/7.0.2
+module load cuda/12.1.1
+
+if command -v conda >/dev/null 2>&1; then
+  eval "$(conda shell.bash hook)"
+elif [[ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]]; then
+  source "${CONDA_ROOT}/etc/profile.d/conda.sh"
+else
+  echo "[ERROR] Could not find conda. Set CONDA_ROOT or load your conda setup before qsub." >&2
+  exit 1
+fi
+conda activate "${CONDA_ENV}"
+
+echo "[INFO] Conda env: ${CONDA_PREFIX:-unknown}"
+echo "[INFO] Python: $(python --version) ($(command -v python))"
+python - <<'PY'
+import sys
+
+if sys.version_info[:2] != (3, 11):
+    raise SystemExit(f"Expected Python 3.11 from the active conda env, got {sys.version.split()[0]} at {sys.executable}")
+PY
+
+export PYTHONUNBUFFERED=1
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
+export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
+export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-7.0;8.0;9.0}"
+
+python scripts/check_katana_gpu.py --min-cc 7.0
+
+DEBUG_ARGS=(--config "${CONFIG_PATH}" --manifest-rows "${MANIFEST_ROWS}")
+if [[ "${SKIP_MODEL_LOAD}" == "1" ]]; then
+  DEBUG_ARGS+=(--skip-model-load)
+fi
+if [[ "${SKIP_JIT_LOAD}" == "1" ]]; then
+  DEBUG_ARGS+=(--skip-jit-load)
+fi
+
+python scripts/debug_meanvc2_finetune.py "${DEBUG_ARGS[@]}"
+
+echo "Debug job finished at: $(date)"

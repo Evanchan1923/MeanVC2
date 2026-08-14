@@ -77,6 +77,20 @@ pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.
 pip install -r requirements.txt
 ```
 
+Katana users should use the portable setup script instead:
+
+```bash
+bash scripts/setup_katana_meanvc2_env.sh
+```
+
+See `docs/katana_gpu_portability.md` for the V100/A100/H100/H200 policy and PBS runtime checks.
+
+To test the Katana environment and checkpoints without launching training:
+
+```bash
+qsub meanVC_ft_debug.pbs
+```
+
 ### 2. Download Pretrained Models
 
 ```bash
@@ -274,5 +288,3 @@ You’re welcome to join our WeChat group for technical discussions and updates.
 </p>
 
 ## ⭐ Star History
-
-
