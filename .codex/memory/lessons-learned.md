@@ -1,5 +1,6 @@
 # Lessons Learned
 
+- In PBS, load CUDA/ffmpeg modules for system libraries, then activate conda and verify `python --version`; the module Python version is not the training Python once conda is active.
 - Upstream MeanVC2 README recommends the 120ms+40ms path for quality and a four-field `.list` manifest; SAPC-specific preparation should produce that same contract rather than carrying old prompt-mel fields.
 - When `main` is an ancestor of `sapc-finetune-pipeline`, `git merge --ff-only sapc-finetune-pipeline` cleanly updates local `main` without creating a merge commit.
 - `git merge-tree --write-tree main HEAD` can verify the `sapc-finetune-pipeline` merge result without switching branches or modifying the working tree.

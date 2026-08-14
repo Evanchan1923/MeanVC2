@@ -1,5 +1,6 @@
 # Decisions
 
+- Use a Python 3.11 conda environment for MeanVC2 training, matching upstream README; do not rely on Katana's `python/3.10.8` module for the training interpreter.
 - Keep the SAPC HF wrapper additive while preserving upstream MeanVC2's active training contract: 120ms+40ms config, pretrained safetensors initialization, 160ms BN extraction, and four-field `utt|bn|mel|xvector` manifests.
 - Keep the `sapc-finetune-pipeline` to `main` merge local for now; do not push `main` to `origin` without an explicit user request.
 - During merge-feasibility checks, report the fast-forward/conflict status first and wait for an explicit merge request before moving branch pointers.

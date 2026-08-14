@@ -2,6 +2,7 @@
 
 ## 2026-08-14
 
+- Updated `meanVC_ft_v1.pbs` to use the `/srv/scratch/z5327748/conda_envs/meanvc2` Python 3.11 conda environment by default and validate the active interpreter before training.
 - Audited SAPC MeanVC2 fine-tuning against upstream ASLP-lab/MeanVC2 and added `meanvc2_upstream_finetune_audit.md`.
 - Aligned SAPC feature preparation with upstream fine-tuning expectations by emitting four-field manifests, using full BN extraction windows, and truncating mel frames to the hop boundary.
 - Fast-forward merged `sapc-finetune-pipeline` into local `main`; remote `origin/main` has not been pushed.

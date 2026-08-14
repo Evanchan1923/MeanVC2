@@ -1,5 +1,6 @@
 # Done
 
+- 2026-08-14: Updated `meanVC_ft_v1.pbs` to default to the `/srv/scratch/z5327748/conda_envs/meanvc2` conda env from `/srv/scratch/z5327748/miniforge3`, purge inherited modules, load CUDA/ffmpeg only, and fail early unless the active conda Python is 3.11.
 - 2026-08-14: Audited the SAPC MeanVC2 fine-tuning pipeline against upstream ASLP-lab/MeanVC2 commit `0d39c8a`, documented the comparison in `meanvc2_upstream_finetune_audit.md`, and aligned the SAPC manifest/feature framing with upstream expectations.
 - 2026-08-14: Fast-forward merged `sapc-finetune-pipeline` into local `main`; both local branches now point at commit `e71e28a`.
 - 2026-08-14: Cross-checked `sapc-finetune-pipeline` against `main`; local `main` was an ancestor of the branch, `git merge-tree --write-tree main HEAD` reported no conflicts, and the branch was safe to fast-forward merge into local `main`.

@@ -13,8 +13,8 @@ echo "Job started at: $(date)  Job ID: ${PBS_JOBID:-unknown}  Host: $(hostname)"
 
 CONFIG_PATH="${CONFIG_PATH:-configs/meanVC_ft_v1.yaml}"
 RUNTIME_CONFIG_PATH="${RUNTIME_CONFIG_PATH:-${TMPDIR:-/tmp}/meanVC_ft_v1.${PBS_JOBID:-$$}.yaml}"
-CONDA_ENV="${CONDA_ENV:-sapc2}"
-CONDA_ROOT="${CONDA_ROOT:-${HOME}/miniconda3}"
+CONDA_ENV="${CONDA_ENV:-/srv/scratch/z5327748/conda_envs/meanvc2}"
+CONDA_ROOT="${CONDA_ROOT:-/srv/scratch/z5327748/miniforge3}"
 
 TRAIN_DEVICES="${TRAIN_DEVICES:-1}"
 TRAIN_NUM_WORKERS="${TRAIN_NUM_WORKERS:-4}"
@@ -22,16 +22,28 @@ TRAIN_EPOCHS="${TRAIN_EPOCHS:-}"
 PREPARE_ONLY="${PREPARE_ONLY:-0}"
 TRAIN_ONLY="${TRAIN_ONLY:-0}"
 
-module load python/3.10.8
+module purge
 module load ffmpeg/7.0.2
 module load cuda/12.1.1
 
 if command -v conda >/dev/null 2>&1; then
   eval "$(conda shell.bash hook)"
-else
+elif [[ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]]; then
   source "${CONDA_ROOT}/etc/profile.d/conda.sh"
+else
+  echo "[ERROR] Could not find conda. Set CONDA_ROOT or load your conda setup before qsub." >&2
+  exit 1
 fi
 conda activate "${CONDA_ENV}"
+
+echo "[INFO] Conda env: ${CONDA_PREFIX:-unknown}"
+echo "[INFO] Python: $(python --version) ($(command -v python))"
+python - <<'PY'
+import sys
+
+if sys.version_info[:2] != (3, 11):
+    raise SystemExit(f"Expected Python 3.11 from the active conda env, got {sys.version.split()[0]} at {sys.executable}")
+PY
 
 export PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"

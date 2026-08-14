@@ -7,6 +7,7 @@
 - MeanVC downloaded checkpoints are expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
 - MeanVC2 fine-tuning uses the same checkpoint root, with `meanvc2_120ms_40ms.safetensors` and `fastu2pp_160ms.pt` expected under `/srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint`.
 - The SAPC MeanVC2 manifest should follow upstream's four-field format: `utt_id|bn.npy|mel.npy|xvector.npy`.
+- Katana MeanVC2 jobs should activate `/srv/scratch/z5327748/conda_envs/meanvc2` from `/srv/scratch/z5327748/miniforge3`; the PBS script checks that active Python is 3.11.
 - The MeanVC2 SAPC fine-tune run name is `meanVC2_ft_v1`, so artifacts are written under `/srv/scratch/speechdata/SAPC_Team/meanvc_runs/meanVC2_ft_v1`.
 - SAPC Severe Hugging Face dataset root is `/srv/scratch/speechdata/speech-corpora/dysarthric/SAPC_HF/SAPC_Severe`, with `train` used for fine-tuning and `dev` reserved for later validation.
 - `configs/speaker_research_nutts_gt200.csv` is derived from `configs/speaker_research_all.csv` using `n_utts > 200` and descending `n_utts` order.
