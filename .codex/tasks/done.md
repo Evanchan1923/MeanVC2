@@ -1,5 +1,6 @@
 # Done
 
+- 2026-08-14: Audited the SAPC MeanVC2 fine-tuning pipeline against upstream ASLP-lab/MeanVC2 commit `0d39c8a`, documented the comparison in `meanvc2_upstream_finetune_audit.md`, and aligned the SAPC manifest/feature framing with upstream expectations.
 - 2026-08-14: Fast-forward merged `sapc-finetune-pipeline` into local `main`; both local branches now point at commit `e71e28a`.
 - 2026-08-14: Cross-checked `sapc-finetune-pipeline` against `main`; local `main` was an ancestor of the branch, `git merge-tree --write-tree main HEAD` reported no conflicts, and the branch was safe to fast-forward merge into local `main`.
 - 2026-08-14: Moved the standalone MeanVC2 fine-tune repository to `/home/evan1923/projects/JC-meanVC2`, changed its `origin` remote to `git@github.com:Evanchan1923/MeanVC2.git`, and created the `sapc-finetune-pipeline` branch for the transferred pipeline work.

@@ -1,5 +1,6 @@
 # Lessons Learned
 
+- Upstream MeanVC2 README recommends the 120ms+40ms path for quality and a four-field `.list` manifest; SAPC-specific preparation should produce that same contract rather than carrying old prompt-mel fields.
 - When `main` is an ancestor of `sapc-finetune-pipeline`, `git merge --ff-only sapc-finetune-pipeline` cleanly updates local `main` without creating a merge commit.
 - `git merge-tree --write-tree main HEAD` can verify the `sapc-finetune-pipeline` merge result without switching branches or modifying the working tree.
 - When porting the SAPC wrapper into pulled MeanVC2, `defaults.ini` must include wrapper-passed flags such as `run_validation`, and `src/train/train.py` must explicitly honor `save_dir` plus `pretrained_ckpt_path`.

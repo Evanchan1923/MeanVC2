@@ -2,6 +2,8 @@
 
 ## 2026-08-14
 
+- Audited SAPC MeanVC2 fine-tuning against upstream ASLP-lab/MeanVC2 and added `meanvc2_upstream_finetune_audit.md`.
+- Aligned SAPC feature preparation with upstream fine-tuning expectations by emitting four-field manifests, using full BN extraction windows, and truncating mel frames to the hop boundary.
 - Fast-forward merged `sapc-finetune-pipeline` into local `main`; remote `origin/main` has not been pushed.
 - Verified that `sapc-finetune-pipeline` could be fast-forward merged into local `main` with no Git merge conflicts, no diff whitespace errors, and passing Python/YAML/INI syntax checks.
 - Moved the active MeanVC2 fine-tune repository to `/home/evan1923/projects/JC-meanVC2`, retargeted `origin` to `git@github.com:Evanchan1923/MeanVC2.git`, and created the `sapc-finetune-pipeline` branch without merging to `main`.

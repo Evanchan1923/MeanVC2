@@ -40,7 +40,6 @@ prepare:
   min_duration: 0.05
   max_duration: null
   max_errors: 100
-  max_prompt_mels_per_utt: 8
   asr_ckpt_path: "${user_settings.checkpoint_root}/fastu2pp_160ms.pt"
   speaker_embedding_model: "wavlm_large"
   speaker_verification_ckpt_path: "${user_settings.speaker_verification_ckpt_path}"

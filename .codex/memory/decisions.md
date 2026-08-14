@@ -1,5 +1,6 @@
 # Decisions
 
+- Keep the SAPC HF wrapper additive while preserving upstream MeanVC2's active training contract: 120ms+40ms config, pretrained safetensors initialization, 160ms BN extraction, and four-field `utt|bn|mel|xvector` manifests.
 - Keep the `sapc-finetune-pipeline` to `main` merge local for now; do not push `main` to `origin` without an explicit user request.
 - During merge-feasibility checks, report the fast-forward/conflict status first and wait for an explicit merge request before moving branch pointers.
 - Use `/home/evan1923/projects/JC-meanVC2` as the standalone active MeanVC2 repo path and keep the SAPC fine-tune pipeline files there rather than maintaining them only in the outer MeanVC-based repo.

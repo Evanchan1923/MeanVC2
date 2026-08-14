@@ -218,10 +218,8 @@ def extract_bn_from_audio(asr_model, wav: np.ndarray, sample_rate: int, mode: st
     bns = []
 
     with torch.no_grad():
-        for i in range(0, fbanks.shape[1], step):
+        for i in range(0, max(fbanks.shape[1] - window + 1, 0), step):
             fbank = fbanks[:, i:i + window, :]
-            if fbank.shape[1] < 10:
-                break
             if uses_forward_encoder_chunk:
                 encoder_output, att_cache, cnn_cache = asr_model.forward_encoder_chunk(
                     fbank,
@@ -250,7 +248,9 @@ def extract_mel_from_audio(mel_extractor: MelSpectrogramFeatures, wav: np.ndarra
     wav_tensor = torch.from_numpy(wav).float().unsqueeze(0).to(device)
     with torch.no_grad():
         mel = mel_extractor(wav_tensor)
-    return mel.squeeze(0).detach().cpu().numpy().T
+    mel = mel.squeeze(0).detach().cpu().numpy().T
+    desired_frames = int(min(wav.size / mel_extractor.hop_length, mel.shape[0]))
+    return mel[:desired_frames]
 
 
 def extract_speaker_embedding(sv_model, wav: np.ndarray, device: torch.device) -> np.ndarray:
@@ -305,7 +305,6 @@ def prepare_features(cfg: dict[str, Any], repo_root: Path, run_dir: Path, output
     limit = prepare_cfg.get("limit")
     max_duration = prepare_cfg.get("max_duration")
     min_duration = float(prepare_cfg.get("min_duration", 0.05))
-    max_prompts_per_utt = int(prepare_cfg.get("max_prompt_mels_per_utt", 8))
     bn_frame_mode = prepare_cfg.get("bn_frame_mode", "200ms")
 
     prepared_dir = output_dir / output_subdir
@@ -379,18 +378,9 @@ def prepare_features(cfg: dict[str, Any], repo_root: Path, run_dir: Path, output
     if not records:
         raise RuntimeError("No training records were prepared")
 
-    by_speaker: dict[str, list[str]] = {}
-    for record in records:
-        by_speaker.setdefault(record["speaker"], []).append(record["mel_path"])
-
     with manifest_path.open("w", encoding="utf-8") as manifest_f:
         for record in records:
-            prompt_paths = [path for path in by_speaker[record["speaker"]] if path != record["mel_path"]]
-            if not prompt_paths:
-                prompt_paths = [record["mel_path"]]
-            random.shuffle(prompt_paths)
-            prompt_paths = prompt_paths[:max_prompts_per_utt]
-            parts = [record["id"], record["bn_path"], record["mel_path"], record["xvector_path"], *prompt_paths]
+            parts = [record["id"], record["bn_path"], record["mel_path"], record["xvector_path"]]
             manifest_f.write("|".join(parts) + "\n")
 
     summary = {
