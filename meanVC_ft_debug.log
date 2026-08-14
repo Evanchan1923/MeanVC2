@@ -1,0 +1,68 @@
+Debug job started at: Fri Aug 14 19:24:29 AEST 2026  Job ID: 9001296.kman.restech.unsw.edu.au  Host: k105
+[INFO] Conda env: /srv/scratch/z5327748/conda_envs/meanvc2
+[INFO] Python: Python 3.11.15 (/srv/scratch/z5327748/conda_envs/meanvc2/bin/python)
+[GPU CHECK] Python: 3.11.15 (/srv/scratch/z5327748/conda_envs/meanvc2/bin/python)
+[GPU CHECK] Torch: 2.5.1+cu121
+[GPU CHECK] Torch CUDA runtime: 12.1
+[GPU CHECK] CUDA_VISIBLE_DEVICES=<unset>
+[GPU CHECK] TORCH_CUDA_ARCH_LIST=7.0;8.0;9.0
+[GPU CHECK] Visible CUDA devices: 1
+[GPU CHECK] cuda:0: Tesla V100-SXM2-32GB, compute capability 7.0, memory 31.7 GiB
+[INFO] Python: 3.11.15 (/srv/scratch/z5327748/conda_envs/meanvc2/bin/python)
+[INFO] Torch: 2.5.1+cu121, torch CUDA runtime: 12.1, cuda available: True
+[INFO] CUDA_VISIBLE_DEVICES=<unset>
+[OK] fine-tune YAML config: /home/z5327748/MeanVC2/configs/meanVC_ft_v1.yaml (0.0 MiB)
+[OK] import accelerate
+[OK] import datasets
+[OK] import einops
+[OK] import librosa
+[OK] import safetensors
+[OK] import soundfile
+[OK] import torchaudio
+[OK] import torchdiffeq
+[OK] import wandb
+[OK] import yaml
+[INFO] repo_root=/home/z5327748/MeanVC2
+[INFO] output_dir=/srv/scratch/speechdata/SAPC_Team/meanvc_runs/meanVC2_ft_v1/artifacts
+[INFO] manifest_path=/srv/scratch/speechdata/SAPC_Team/meanvc_runs/meanVC2_ft_v1/artifacts/prepared_train_meanvc2_160ms/train_manifest.txt
+[OK] HF dataset path exists: /srv/scratch/speechdata/speech-corpora/dysarthric/SAPC_HF/SAPC_Severe
+[OK] MeanVC2 model config: /home/z5327748/MeanVC2/src/config/config_120ms_40ms.json (0.0 MiB)
+[OK] MeanVC2 pretrained safetensors: /srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint/meanvc2_120ms_40ms.safetensors (67.6 MiB)
+[OK] FastU2++ ASR checkpoint: /srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint/fastu2pp_160ms.pt (234.9 MiB)
+Traceback (most recent call last):
+  File "/home/z5327748/MeanVC2/scripts/debug_meanvc2_finetune.py", line 165, in <module>
+    main()
+  File "/home/z5327748/MeanVC2/scripts/debug_meanvc2_finetune.py", line 150, in main
+    check_config_paths(cfg, repo_root, train_args)
+  File "/home/z5327748/MeanVC2/scripts/debug_meanvc2_finetune.py", line 76, in check_config_paths
+    require_file(Path(cfg["prepare"]["speaker_verification_ckpt_path"]).expanduser(), "speaker verification checkpoint")
+  File "/home/z5327748/MeanVC2/scripts/debug_meanvc2_finetune.py", line 20, in require_file
+    raise FileNotFoundError(f"{label} not found: {path}")
+FileNotFoundError: speaker verification checkpoint not found: /srv/scratch/speechdata/SAPC_Team/meanVC_checkpoint/wavlm_large_finetune.pth
+
+================================================================================
+                     Resource Usage on 14/08/2026 19:25:24                      
+
+Job Id: 9001296 
+Queue: SIMI
+Walltime: 00:00:52  (requested 00:30:00)
+Job unsuccessful. Exit Status 1 - Exit status refers to the exit value of the
+top process in the job, typically the shell.
+This may be the exit value of the last command executed in the shell.
+See job output error.
+
+--------------------------------------------------------------------------------
+|              |             GPUs              |            Memory             |
+--------------------------------------------------------------------------------
+| Node  GPU ID | Requested   Used   Efficiency | Available   Used              |
+| k105    0    |     1        0.0       0%     | 32768 MiB   0.0B              |
+--------------------------------------------------------------------------------
+|Total         |     1        0.0      0.0%    |                               |
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+|              |             CPUs              |            Memory             |
+--------------------------------------------------------------------------------
+| Node         | Requested   Used   Efficiency | Requested   Used   Efficiency |
+| k105         |     4       0.17      4.0%    |  32.0gb    0.59gb     1.8%    |
+--------------------------------------------------------------------------------
