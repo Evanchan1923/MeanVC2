@@ -2,6 +2,8 @@
 
 ## 2026-08-14
 
+- Fast-forward merged `sapc-finetune-pipeline` into local `main`; remote `origin/main` has not been pushed.
+- Verified that `sapc-finetune-pipeline` could be fast-forward merged into local `main` with no Git merge conflicts, no diff whitespace errors, and passing Python/YAML/INI syntax checks.
 - Moved the active MeanVC2 fine-tune repository to `/home/evan1923/projects/JC-meanVC2`, retargeted `origin` to `git@github.com:Evanchan1923/MeanVC2.git`, and created the `sapc-finetune-pipeline` branch without merging to `main`.
 - Transferred the SAPC MeanVC2 fine-tune pipeline, `.codex` settings, and repo guidance into `JC-meanVC2`, and updated tracking to use that folder as the active MeanVC2 repo path.
 - Compared the current MeanVC repo against `MeanVC2-JC` and documented the migration in `meanvc2_migration_summary.md`.
